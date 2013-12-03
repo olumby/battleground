@@ -1,0 +1,64 @@
+<html>
+<head>
+	<script src="assets/js/jquery-1.9.1.js"></script>
+
+	<style>
+		* { margin:0; padding:0; }
+		html, body { width:100%; height:100%; background:#22262e; }
+		canvas { display:block; }
+		.ui-primary { height:100%; width:100%; }
+		.ui-primary .ui-overlay-1 {
+			-webkit-box-align: center;
+			-webkit-box-pack: center;
+			background: -webkit-radial-gradient(rgba(0,0,0,0) 60%, rgba(0,0,0,.8) 100%);
+			bottom: 0;
+			display: -webkit-box;
+			left: 0;
+			position: fixed;
+			right: 0;
+			top: 0;
+			z-index: 10;
+			pointer-events:none;
+		}
+		.ui-primary .ui-debug {
+			display:none;
+			height:30px;
+			position:absolute;
+			bottom:0;
+			left:0;
+			right:0;
+			background:rgba(0,0,0,.4);
+			pointer-events:none;
+		}
+		.ui-primary .ui-debug span {
+			line-height:30px;
+			padding:0 10px;
+			font-family:"Helvetica Neue", Helvetica, Arial;
+			font-size:12px;
+			color:#fff;
+			pointer-events:none;
+		}
+		.ui-primary .ui-zoom-in, .ui-primary .ui-zoom-out {
+			width:20px; height:20px;
+			background:#000;
+			position:absolute;
+			margin: 10px;
+			color:#fff;
+			top: 10px;
+		}
+		 .ui-primary .ui-zoom-out {
+		 	top:35px;
+		 }
+	</style>
+</head>
+<body>
+	<div class="ui-primary">
+		<div class="ui-zoom-in">+</div>
+		<div class="ui-zoom-out">-</div>
+		<div class="ui-overlay-1"></div>
+		<div class="ui-debug"><span class="coors">[x50, y50]</span></div>
+ 		<canvas id="battleground"></canvas>
+ 	</div>
+	<script src="assets/js/battleground.js"></script>
+</body>
+</html>			

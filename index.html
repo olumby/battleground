@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+<head>
+	<meta charset="utf-8">
+
+	<title>BATTLEGROUND - by BATTLEFIELDO</title>
+
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:600,400' rel='stylesheet' type='text/css'>
+	<link href="assets/style/style.css" rel="stylesheet">
+	<script src="assets/js/jquery-1.9.1.js"></script>
+
+</head>
+
+<body>
+	
+	<div class="ui-overlay">
+
+		<div class="ui-overlay-gradient"></div>
+
+		<header id="main">
+			<div id="titles">
+				<h1>Battleground</h1>
+				<span>by
+					<img src="http://battlefieldo.com/assets/themes/battlefieldo/images/logo.svg" width="14" height="14" />
+					<h2>Battlefieldo</h2>
+				</span>
+			</div>
+			<nav>
+				<ul>
+					<li><a href="#">Games</a></li>
+					<li class="active"><a href="#">Maps</a></li>
+					<li><a href="#">Weapons</a></li>
+					<li><a href="#">Vehicles</a></li>
+					<li><a href="#">Factions</a></li>
+				</ul>
+			</nav>
+			<div id="userbits">
+				<div class="userinfo">
+					<figure>
+						<img alt="" src="http://1.gravatar.com/avatar/fef41e7a4a4764b6d06fc1c87c3a2380?s=50&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D50&amp;r=G" class="avatar avatar-50 photo" height="50" width="50">
+					</figure>
+					<div class="words">
+						<h6>CmdSft</h6>
+						<span><a href="http://battlefieldo.com/logout/?_wpnonce=a7e2a57e97" title="signout">Sign Out</a></span>
+					</div>
+				</div>
+			</div>
+		</header>
+
+		<aside class="ui-subnav">
+			<div id="small-subnav" class="ui-wrap">
+
+			</div>
+			<div id="large-subnav" class="ui-wrap">
+				<nav class="games">
+					<ul>
+						<li><img src="assets/images/battlefield4logosmall.png" alt="Battlefield 4"></img></li>
+					</ul>
+				</nav>
+				<nav class="bf4 clearfix">
+					<nav>
+						<h3>Base Game</h3>
+						<ul>
+							<li><a data-map="mp_siege" href="index.html?map=mp_siege">Siege of Shanghai</a></li>
+							<li><a data-map="mp_naval" href="index.html?map=mp_naval">Paracel Storm</a></li>
+							<li><a data-map="mp_abandoned" href="index.html?map=mp_abandoned">Zavod 311</a></li>
+							<li><a data-map="mp_damage" href="index.html?map=mp_damage">Lancang Dam</a></li>
+							<li><a data-map="mp_flooded" href="index.html?map=mp_flooded">Flood Zone</a></li>
+							<li><a data-map="mp_thedish" href="index.html?map=mp_thedish">Rogue Transmission</a></li>
+							<li><a data-map="mp_resort" href="index.html?map=mp_resort">Hainan Resort</a></li>
+							<li><a data-map="mp_tremors" href="index.html?map=mp_tremors">Dawnbreaker</a></li>
+							<li><a data-map="mp_prison" href="index.html?map=mp_prison">Operation Locker</a></li>
+							<li><a data-map="mp_journey" href="index.html?map=mp_journey">Golmud Railway</a></li>
+						</ul>
+					</nav>
+					<nav>
+						<h3>China Rising</h3>
+						<ul>
+							<li><a data-map="xp1_001" href="index.html?map=xp1_001">Silk Road</a></li>
+							<li><a data-map="xp1_002" href="index.html?map=xp1_002">Altai Range</a></li>
+							<li><a data-map="xp1_003" href="index.html?map=xp1_003">Guilin Peaks</a></li>
+							<li><a data-map="xp1_004" href="index.html?map=xp1_004">Dragon Pass</a></li>
+						</ul>
+					</nav>
+					<nav class="disabled">
+						<h3>Second Assault</h3>
+						<ul>
+							<li><a href="">Caspain Border</a></li>
+							<li><a href="">Gulf of Oman</a></li>
+							<li><a href="">Operation Firestorm</a></li>
+							<li><a data-map="mp_subway" href="index.html?map=mp_subway">Operation Metro</a></li>
+						</ul>
+					</nav>
+				</nav>
+			</div>
+			<div class="draw"><img src="assets/images/draw.svg" alt="Open/Close Draw"></div>
+		</aside>
+
+		<aside class="ui-sidebar">
+			<div class="content">
+
+			</div>
+			<div class="draw"><img src="assets/images/draw.svg" alt="Open/Close Draw"></div>
+		</aside>
+
+		<aside class="ui-controls">
+			<div class="grid">
+				<span class="ui-grid-title">Grid</span> <button class="ui-grid-on">On</button> <button class="ui-grid-off">Off</button>
+			</div>
+			<div class="boundaries">
+				<span class="ui-boundaries-title">Boundaries</span> <button class="ui-boundaries-on">On</button> <button class="ui-boundaries-off">Off</button>
+			</div>
+			<div class="coordinates">
+				<span class="ui-coor-title">Coordinates</span> <span class="ui-coor-text">0, 0</span>
+			</div>
+			<div class="zoom">
+				<button class="ui-zoom-in">+</button>
+				<span class="ui-zoom-level">0%</span>
+				<button class="ui-zoom-out">-</button>
+			</div>
+		</aside>
+
+		<canvas id="battleground"></canvas>
+	</div>
+	<script src="assets/js/site.js"></script>
+	<script src="assets/js/battleground.js"></script>
+</body>
+</html>
