@@ -1,4 +1,4 @@
-var globalData, zoomInfo, mapInfo;
+var globalData, zoomInfo, mapInfo, mXPos, mYPos;
 
 $(document).ready(function() {
 
@@ -26,8 +26,8 @@ $(document).ready(function() {
 	var canvas = document.getElementById('battleground');
 	var ctx = canvas.getContext('2d');
 
-	var mXPos = 50;
-	var mYPos = 50;
+	mXPos = 50;
+	mYPos = 50;
 
 	var imageRes = 1024;
 
@@ -51,9 +51,81 @@ $(document).ready(function() {
 
 	function drawStuff(xloop, yloop, zoom) {
 
-		var urlArray = new Array();
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+		var totalWidth = xloop * imageRes;
+		var totalHeight = yloop * imageRes;
+
+		var centerXPx = totalWidth*(mXPos/100)
+		var centerYPx = totalHeight*(mYPos/100)
+
+		var xStartPx = centerXPx - (canvas.width/2);
+		var xFinishPx = centerXPx + (canvas.width/2);
+		var yStartPx = centerYPx - (canvas.height/2);
+		var yFinishPx = centerYPx + (canvas.height/2);
+
+
+		var startCoor = [Math.floor(xStartPx / imageRes), Math.floor(yStartPx / imageRes)]
+		var finishCoor = [Math.ceil(xFinishPx / imageRes), Math.ceil(yFinishPx / imageRes)]
+
+		console.log (startCoor, finishCoor);
+
+		var coordinates = [];
+
+		for (var x = startCoor[0]; x <= finishCoor[0]; x++) {
+			for (var y = startCoor[1]; y <= finishCoor[1]; y++) {
+
+				var theUrl = baseUrl;
+
+				theUrl = theUrl.replace("{x}", x);
+				theUrl = theUrl.replace("{y}", y);
+				theUrl = theUrl.replace("{z}", zoom);
+
+				var urlDict = {
+					"x" : x,
+					"y" : y,
+					"url" : theUrl
+				};
+				coordinates.push(urlDict);
+
+				var globalXOffset = xStartPx - (coordinates[0].x * imageRes);
+				var globalYOffset = yStartPx - (coordinates[0].y * imageRes);
+
+
+
+			}
+		}
+
+		var globalXOffset = xStartPx - (coordinates[0].x * imageRes);
+		var globalYOffset = yStartPx - (coordinates[0].y * imageRes);
+
+		$.each(coordinates, function(index, val) {
+
+			var img = new Image();
+
+
+			if(val.x > (xloop-1) || val.x < 0 || val.y > (yloop-1) || val.y < 0) {
+				img.src = "assets/images/black.png";
+			} else {
+				img.src = val.url;
+			}
+			
+			img.width = imageRes;
+			img.height = imageRes;
+
+			var xOffset = (imageRes * (val.x - coordinates[0].x))-globalXOffset;
+			var yOffset = (imageRes * (val.y - coordinates[0].y))-globalYOffset;
+			img.onload = function() {
+				ctx.drawImage(img, xOffset, yOffset, imageRes, imageRes);
+			}
+
+		});
+
+
+		//console.log(xStart, xFinish);
+		//console.log(yStart, yFinish);
 		
-		for(var i = 0; i < xloop; i++) {
+/*		for(var i = 0; i < xloop; i++) {
 			for(var j = 0; j < yloop; j++) {
 				var theUrl = baseUrl;
 
@@ -143,6 +215,8 @@ $(document).ready(function() {
 
 		});
 
+*/
+
 	}
 
 	// Setup mouse dragging
@@ -161,12 +235,13 @@ $(document).ready(function() {
 	});
 
 	$('#battleground').mousemove(function(e) {
+
 		if (clicking) {
 			e.preventDefault();
 			
 			var directionX, directionY;
 
-			var moveRate = (90/(zoomLevel+1));
+			var moveRate = (100/(zoomLevel+1));
 
 			if(((previousX - e.clientX)/moveRate)) {
 				directionX = ((previousX - e.clientX)/moveRate)

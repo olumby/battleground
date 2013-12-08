@@ -1,0 +1,492 @@
+@import "normalize.css";
+@import "lesshat";
+
+
+@NorwesterStack: "Norwester", "PT Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+@OpenSansStack: "Open Sans", sans-serif;
+@MavenProLightStack: "MavenProLight", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+@headerBorder: 1px solid rgba(38,38,38,1);
+
+@blueGlowStack: 0px 0px 6px rgba(92, 188, 238, 0.8),0px 0px 5px rgba(92, 188, 238, 0.9),0px 0px 5px rgba(92, 188, 238, 0.7);
+@blueGlowStackLite: 0px 0px 6px rgba(92, 188, 238, 0.8);
+@redGlowStack:  0px 0px 6px rgba(231, 76, 60, 0.8),0px 0px 5px rgba(231, 76, 60, 0.9),0px 0px 5px rgba(231, 76, 60, 0.7);
+
+html, body {
+	height:100%;
+	width:100%;
+}
+
+body {
+	-webkit-font-smoothing: antialiased;
+	-moz-font-smoothing: antialiased;
+	-ms-font-smoothing: antialiased;
+	font-smoothing: antialiased;
+	background: rgba(0, 0, 0, 1);
+
+	a {
+		color:rgba(255,255,255,.25);
+		text-decoration: none;
+	}
+
+	#battleground {
+		display:block;
+		cursor: crosshair;
+		&:active {
+			cursor: move;
+		}
+	}
+
+	.ui-overlay {
+
+		position:absolute;
+		width:100%;
+		height:100%;
+
+		header {
+			height:81px;
+			position:absolute;
+			width:100%;
+			background:rgba(0,0,0,.8);
+			overflow:auto;
+			div#titles, nav {
+				float:left;
+				.box-sizing(border-box);
+			}
+			div#titles {
+				height:100%;
+				padding:10px 30px;
+				width:330px;
+				border-bottom:@headerBorder;
+				border-right:@headerBorder;
+				h1 {
+					font-family:@NorwesterStack;
+					font-size:36px;
+					line-height:36px;
+					color:rgba(255,255,255,1);
+					text-transform: uppercase;
+					margin:0;
+				}
+				span {
+					font-size:10px;
+					font-family:@OpenSansStack;
+					color:rgba(102,102,102,1);
+					img {
+						vertical-align: text-bottom;
+						padding:0 2px;
+					}
+					h2 {
+						margin:0;
+						display:inline;
+						font-family:@NorwesterStack;
+						color:rgba(255,255,255,1);
+						text-transform: uppercase;
+					}
+				}
+			}
+			nav {
+				font-family:@OpenSansStack;
+				height:100%;
+				ul {
+					height:100%;
+					list-style-type: none;
+					padding:0;
+					margin:0;
+					font-size:0;
+					.display(flex);
+					display: -webkit-box;
+					display: -webkit-flex;
+					li {
+						height:100%;
+						display:inline-block;
+						border-bottom:@headerBorder;
+						border-right:@headerBorder;
+						.box-sizing(border-box);
+						.display(flex);
+						display: -webkit-box;
+	    				display: -webkit-flex;
+						.flex-direction(row);
+						.align-items(center);
+						a {
+							font-size:18px;
+							font-weight:600;
+							margin:0 40px;
+							text-transform: uppercase;
+							color:rgba(255,255,255,1);
+							text-shadow:@blueGlowStack;
+						}
+						&.active {
+							border-bottom:0;
+							a {
+								text-shadow:@redGlowStack;
+							}
+						}
+					}
+				}
+			}
+			div#userbits {
+				height:100%;
+				overflow:hidden;
+				border-bottom:@headerBorder;
+				.box-sizing(border-box);
+				.userinfo {
+					float:right;
+					margin-top:13px;
+					padding-right:30px;
+					figure {
+						float:left;
+						margin-right:10px;
+						img { 
+							.border-radius(3px);
+							overflow:hidden;
+						}
+					}
+					.words {
+						float:left;
+						h6 {
+							font-family:"MavenProLight", "Helvetica Neue", Helvetica, Arial, sans-serif;
+							font-size: 14px;
+							line-height: 14px;
+							font-weight:300;
+							color:#fff;
+							text-transform:none;
+							margin:0;
+							padding:0;
+							margin-top:10px;
+							text-shadow:@blueGlowStack;
+						}
+						span {
+							font-size:12px;
+							line-height:12px;
+							text-transform: uppercase;
+						}
+					}
+				}
+			}
+		}
+
+		.ui-wrap {
+			height:100%;
+			overflow:hidden;
+			width:100%;
+		}
+
+		.ui-subnav {
+			div#small-subnav {
+				display:none;
+				a {
+					line-height:40px;
+					padding:0 30px;
+					color:rgba(255,255,255,1);
+					font-family:@MavenProLightStack;
+					font-size:12px;
+					text-transform: uppercase;
+					text-shadow:@redGlowStack;
+				}
+			}
+			position: absolute;
+			top:81px;
+			border-bottom:@headerBorder;
+			background: rgba(0, 0, 0, 0.9);
+			width:100%;
+			nav.games {
+				ul {
+					margin:0;
+					padding: 20px 0 0 20px;
+					list-style-type: none;
+					li {
+						margin:0 10px;
+						padding:0;
+						display:inline-block;
+						img {
+
+						}
+					}
+				}
+			}
+			nav.bf4 {
+				padding:0 30px;
+				padding-bottom:5px;
+				nav {
+					float:left;
+				}
+				nav.disabled {
+					 -webkit-filter:blur(.8px);
+					 opacity:0.4;
+				}
+				h3 {
+					margin:0;
+					display:inline;
+					font-family:@OpenSansStack;
+					font-size:12px;
+					font-weight:700;
+					color:rgba(255,255,255,1);
+					text-shadow:@blueGlowStack;
+					text-transform: uppercase;
+				}
+				ul {
+					margin:0;
+					margin-bottom:10px;
+					padding:0;
+					list-style-type: none;
+					li {
+						display:inline-block;
+						margin-right:20px;
+						a {
+							color:rgba(255,255,255,1);
+							font-family:@MavenProLightStack;
+							text-shadow:@blueGlowStack;
+							font-size:12px;
+							text-transform: uppercase;
+							&.active {
+								text-shadow:@redGlowStack;
+							}
+						}
+					}
+				}
+			}
+			.draw {
+				position:absolute;
+				bottom:-26px;
+				right:10px;
+				height:25px;
+				width:25px;
+				border-left:@headerBorder;
+				border-right:@headerBorder;
+				border-bottom:@headerBorder;
+				background: rgba(0, 0, 0, 0.9);
+				cursor: pointer;
+				img {
+					.transition(transform .5s);
+					.filter(drop-shadow(0px 0px 6px rgba(92, 188, 238, 1)));
+					&.rotated {
+						.transform(rotate(180));
+					}
+				}
+			}
+		}
+
+		.ui-sidebar {
+			position: absolute;
+			top:81px;
+			bottom:0;
+			right:0;
+			background: rgba(0, 0, 0, 0.9);
+			border-left:@headerBorder;
+			.box-sizing(border-box);
+			.content {
+				width: 361px;
+			}
+			.draw {
+				position:absolute;
+				left:-26px;
+				bottom:11px;
+				height:25px;
+				width:25px;
+				border-left:@headerBorder;
+				border-top:@headerBorder;
+				border-bottom:@headerBorder;
+				background: rgba(0, 0, 0, 0.9);
+				cursor: pointer;
+				img {
+					.transform(rotate(90));
+					.transition(transform .5s);
+					.filter(drop-shadow(0px 0px 6px rgba(92, 188, 238, 1)));
+					&.rotated {
+						.transform(rotate(270));
+					}
+				}
+			}
+		}
+
+		.ui-controls {
+			position:absolute;
+			left:40px;
+			bottom:30px;
+			
+			.coordinates, .zoom, .boundaries, .grid {
+				background:rgba(0,0,0,1);
+				box-shadow:@blueGlowStackLite;
+				border:@headerBorder;
+				height:30px;
+				line-height:30px;
+				margin-bottom:10px;				
+			}
+			.grid {
+				width:127px;
+				.ui-grid-title, .ui-grid-on, .ui-grid-off {
+					font-size:12px;
+					text-shadow:@blueGlowStack;
+					color:rgba(255, 255, 255, 1);
+					vertical-align:text-bottom;
+					display:inline-block;
+					text-transform: uppercase;
+				}
+				.ui-grid-title {
+					font-family:@OpenSansStack;
+					font-weight:700;
+					padding:0 10px;
+					border-right:@headerBorder;
+				}
+				.ui-grid-on, .ui-grid-off {
+					background:rgba(0,0,0,1);
+					color:rgba(255, 255, 255, 1);
+					border:0;
+					height:30px;
+					text-shadow:@blueGlowStack;
+					font-family:@MavenProLightStack;
+					vertical-align:text-bottom;
+					&:focus {
+						outline:0;
+					}
+				}
+				.ui-grid-off {
+					border-left:@headerBorder;
+				}
+			}
+			.boundaries {
+				width:175px;
+				.ui-boundaries-title, .ui-boundaries-on, .ui-boundaries-off {
+					font-size:12px;
+					text-shadow:@blueGlowStack;
+					color:rgba(255, 255, 255, 1);
+					vertical-align:text-bottom;
+					display:inline-block;
+					text-transform: uppercase;
+				}
+				.ui-boundaries-title {
+					font-family:@OpenSansStack;
+					font-weight:700;
+					padding:0 10px;
+					border-right:@headerBorder;
+				}
+				.ui-boundaries-on, .ui-boundaries-off {
+					background:rgba(0,0,0,1);
+					color:rgba(255, 255, 255, 1);
+					border:0;
+					height:30px;
+					text-shadow:@blueGlowStack;
+					font-family:@MavenProLightStack;
+					vertical-align:text-bottom;
+					&:focus {
+						outline:0;
+					}
+				}
+				.ui-boundaries-off {
+					border-left:@headerBorder;
+				}
+			}
+			.coordinates {
+				.ui-coor-title, .ui-coor-text {
+					font-size:12px;
+					text-shadow:@blueGlowStack;
+					color:rgba(255, 255, 255, 1);
+					vertical-align:text-bottom;
+					display:inline-block;
+				}
+				.ui-coor-title {
+					font-family:@OpenSansStack;
+					font-weight:700;
+					padding:0 10px;
+					border-right:@headerBorder;
+					text-transform: uppercase;
+				}
+				.ui-coor-text {
+					font-family:@MavenProLightStack;
+					padding:0 10px;
+				}
+			}
+			.zoom {
+				width:120px;
+				.ui-zoom-in, .ui-zoom-out {
+					background:rgba(0,0,0,1);
+					color:rgba(255, 255, 255, 1);
+					border:0;
+					height:30px;
+					width:30px;
+					font-size:20px;
+					text-shadow:@blueGlowStack;
+					vertical-align:text-bottom;
+					padding:0;
+					.box-sizing(border-box);
+					&:focus {
+						outline:0;
+					}
+					img {
+						.filter(drop-shadow(0px 0px 6px rgba(92, 188, 238, 1)));
+					}
+				}
+				.ui-zoom-level {
+					color:rgba(255, 255, 255, 1);
+					font-size:12px;
+					font-family:@MavenProLightStack;
+					width:50px;
+					display:inline-block;
+					text-align:center;
+					text-shadow:@blueGlowStackLite;
+					line-height:30px;
+					border-left:@headerBorder;
+					border-right:@headerBorder;
+					vertical-align:text-bottom;
+					.box-sizing(border-box);
+				}
+			}
+		}
+
+		.ui-overlay-gradient {
+			position: absolute;
+			bottom: 0;
+			left: 0;			
+			right: 0;
+			top: 0;
+			pointer-events:none;
+			.background-image(radial-gradient(rgba(0,0,0,0) 0%, rgba(0,0,0,.75) 100%));
+		}
+
+	}
+}
+
+// Fixes
+
+.clearfix:after {
+	content: ".";
+	display: block;
+	clear: both;
+	visibility: hidden;
+	line-height: 0;
+	height: 0;
+}
+
+// Fonts
+
+@font-face {
+    font-family: 'Norwester';
+    src: url('http://battlefieldo.com/assets/themes/battlefieldo/fonts/norwester/norwester.eot?#iefix') format('embedded-opentype'), 
+    url('http://battlefieldo.com/assets/themes/battlefieldo/fonts/norwester/norwester.woff') format('woff'), 
+    url('http://battlefieldo.com/assets/themes/battlefieldo/fonts/norwester/norwester.ttf') format('truetype'), 
+    url('http://battlefieldo.com/assets/themes/battlefieldo/fonts/norwester/norwester.svg#norwester') format('svg');
+}
+
+@font-face {
+    font-family: 'MavenProLight';
+    src: url('http://battlefieldo.com/assets/themes/battlefieldo/fonts/mavenprolight/MavenProLight-100.eot?#iefix') format('embedded-opentype'), 
+    url('http://battlefieldo.com/assets/themes/battlefieldo/fonts/mavenprolight/MavenProLight-100.woff') format('woff'), url('fonts/mavenprolight/MavenProLight-100.ttf') format('truetype'), 
+    url('http://battlefieldo.com/assets/themes/battlefieldo/fonts/mavenprolight/MavenProLight-100.svg#mavenprolight') format('svg');
+    font-weight: 100;
+}
+
+@font-face {
+    font-family: 'MavenProLight';
+    src: url('http://battlefieldo.com/assets/themes/battlefieldo/fonts/mavenprolight/MavenProLight-200.eot?#iefix') format('embedded-opentype'), 
+    url('http://battlefieldo.com/assets/themes/battlefieldo/fonts/mavenprolight/MavenProLight-200.woff') format('woff'), url('fonts/mavenprolight/MavenProLight-200.ttf') format('truetype'), 
+    url('http://battlefieldo.com/assets/themes/battlefieldo/fonts/mavenprolight/MavenProLight-200.svg#mavenprolight') format('svg');
+    font-weight: 200;
+}
+
+@font-face {
+    font-family: 'MavenProLight';
+    src: url('http://battlefieldo.com/assets/themes/battlefieldo/fonts/mavenprolight/MavenProLight-300.eot?#iefix') format('embedded-opentype'), 
+    url('http://battlefieldo.com/assets/themes/battlefieldo/fonts/mavenprolight/MavenProLight-300.woff') format('woff'), url('fonts/mavenprolight/MavenProLight-300.ttf') format('truetype'), 
+    url('http://battlefieldo.com/assets/themes/battlefieldo/fonts/mavenprolight/MavenProLight-300.svg#mavenprolight') format('svg');
+    font-weight: 300;
+}
