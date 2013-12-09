@@ -7,48 +7,80 @@
         "ConquestLarge0": {
           "points": [
             {
-              "type": "objective",
-              "name": "A",
-              "resource": "assets/icons/inactive-objective.png",
+                "type": "objective",
+                "name": "C",
+                "resource": "assets/icons/inactive-obj-c.png",
+                "h": 38,
+                "w": 38,
+                "coors": [
+                    58.333,
+                    47.895
+                ]
+            },
+            {
+                "type": "objective",
+                "name": "E",
+                "resource": "assets/icons/inactive-obj-e.png",
+                "h": 38,
+                "w": 38,
+                "coors": [
+                    59.660,
+                    56.286
+                ]
+            },
+            {
+                "type": "objective",
+                "name": "A",
+                "resource": "assets/icons/inactive-obj-a.png",
+                "h": 38,
+                "w": 38,
+                "coors": [
+                    59.198,
+                    37.457
+                ]
+            },
+            {
+                "type": "objective",
+                "name": "D",
+                "resource": "assets/icons/inactive-obj-d.png",
+                "h": 38,
+                "w": 38,
+                "coors": [
+                    62.255,
+                    48.674
+                ]
+            },
+            {
+                "type": "objective",
+                "name": "B",
+                "resource": "assets/icons/inactive-obj-b.png",
+                "h": 38,
+                "w": 38,
+                "coors": [
+                    59.516,
+                    42.532
+                ]
+            },
+            {
+              "type": "base",
+              "name": "US",
+              "resource": "assets/icons/inactive-base-us.png",
+              "h": 38,
+              "w": 38,
               "coors": [
-                59.48,
-                37.06
+                47.65,
+                45.19
               ]
             },
             {
-              "type": "objective",
-              "name": "B",
-              "resource": "assets/icons/inactive-objective.png",
+              "type": "base",
+              "name": "CN",
+              "resource": "assets/icons/inactive-base-cn.png",
+              "h": 38,
+              "w": 38,
               "coors": [
-                59.717,
-                42.346
-              ]
-            },
-            {
-              "type": "objective",
-              "name": "C",
-              "resource": "assets/icons/inactive-objective.png",
-              "coors": [
-                57.81,
-                47.74
-              ]
-            },
-            {
-              "type": "objective",
-              "name": "D",
-              "resource": "assets/icons/inactive-objective.png",
-              "coors": [
-                61.99,
-                48.57
-              ]
-            },
-            {
-              "type": "objective",
-              "name": "E",
-              "resource": "assets/icons/inactive-objective.png",
-              "coors": [
-                59.62,
-                56.79
+                72.15,
+                44.90
               ]
             }
           ]

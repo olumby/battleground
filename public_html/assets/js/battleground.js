@@ -149,17 +149,23 @@ $(document).ready(function() {
 		if(showGrid) {
 
 			for (var x = 0; x < width; x += zoomInfo[zoomLevel]['grid']) {
+				grid_context.beginPath();
 				grid_context.moveTo(x-xOffset, 0);
 				grid_context.lineTo(x-xOffset, height);
+				grid_context.strokeStyle = "#fff";
+				grid_context.stroke();
+				grid_context.closePath();
 			}
 
 			for (var y = 0; y < height; y += zoomInfo[zoomLevel]['grid']) {
+				grid_context.beginPath();
 				grid_context.moveTo(0, y-yOffset);
 				grid_context.lineTo(width, y-yOffset);
+				grid_context.strokeStyle = "#fff";
+				grid_context.stroke();
+				grid_context.closePath();
 			}
 
-			grid_context.strokeStyle = "#fff";
-			grid_context.stroke();
 
 		}
 
@@ -185,9 +191,12 @@ $(document).ready(function() {
 					var yo = (height*(points[1]/100))-yOffset-(this.height/2);
 					items_context.drawImage(theimg, xo, yo, theimg.width, theimg.height);
 
+
 				}
 
 			});
+
+
 		}
 
 	}
@@ -207,7 +216,7 @@ $(document).ready(function() {
 			boundaries_context.strokeStyle = "#fff";
 			boundaries_context.beginPath();
 			
-			boundaries_context.moveTo( width*(53/100)-xOffset , height*(35/100)-yOffset );
+			/*boundaries_context.moveTo( width*(53/100)-xOffset , height*(35/100)-yOffset );
 			boundaries_context.lineTo( width*(50/100)-xOffset , height*(44/100)-yOffset );
 			boundaries_context.lineTo( width*(50/100)-xOffset , height*(51/100)-yOffset );
 			boundaries_context.lineTo( width*(52/100)-xOffset , height*(57/100)-yOffset );
@@ -215,15 +224,79 @@ $(document).ready(function() {
 			boundaries_context.lineTo( width*(65/100)-xOffset , height*(64/100)-yOffset );
 			boundaries_context.lineTo( width*(67/100)-xOffset , height*(57/100)-yOffset );
 			boundaries_context.lineTo( width*(68/100)-xOffset , height*(45/100)-yOffset );
-			boundaries_context.lineTo( width*(66/100)-xOffset , height*(33/100)-yOffset );
+			boundaries_context.lineTo( width*(66/100)-xOffset , height*(33/100)-yOffset ); */
+
+boundaries_context.lineTo( width*(68.368/100)-xOffset , height*(37.860/100)-yOffset );
+boundaries_context.lineTo( width*(65.946/100)-xOffset , height*(33.708/100)-yOffset );
+boundaries_context.lineTo( width*(61.851/100)-xOffset , height*(31.949/100)-yOffset );
+boundaries_context.lineTo( width*(49.048/100)-xOffset , height*(32.180/100)-yOffset );
+boundaries_context.lineTo( width*(44.002/100)-xOffset , height*(34.717/100)-yOffset );
+boundaries_context.lineTo( width*(41.032/100)-xOffset , height*(38.783/100)-yOffset );
+boundaries_context.lineTo( width*(40.773/100)-xOffset , height*(55.075/100)-yOffset );
+boundaries_context.lineTo( width*(42.762/100)-xOffset , height*(61.419/100)-yOffset );
+boundaries_context.lineTo( width*(48.529/100)-xOffset , height*(63.581/100)-yOffset );
+boundaries_context.lineTo( width*(62.832/100)-xOffset , height*(63.610/100)-yOffset );
+boundaries_context.lineTo( width*(67.272/100)-xOffset , height*(62.024/100)-yOffset );
+boundaries_context.lineTo( width*(69.493/100)-xOffset , height*(58.304/100)-yOffset );
+
 
 			boundaries_context.closePath();
 
 			boundaries_context.fill();
-			boundaries_context.stroke();
 		}
 	
 	}
+
+	// Setup touch dragging
+
+	touching = false;
+
+	$('#battleground').bind("touchstart", function(e){
+		e.preventDefault();
+		previousX = e.clientX;
+		previousY = e.clientY;
+		touching = true;
+	});
+
+	$('#battleground').bind("touchend", function(e){
+		touching = false;
+	});
+
+	$('#battleground').bind("touchmove", function(e){
+
+		console.log(e.touches);
+
+		if (touching) {
+			e.preventDefault();
+			
+			var directionX, directionY;
+
+			var moveRate = (100/(zoomLevel+1));
+
+			if(((previousX - e.clientX)/moveRate)) {
+				directionX = ((previousX - e.clientX)/moveRate)
+				if(mXPos + directionX < 100 && mXPos + directionX > 1) {
+					mXPos += directionX;	
+					previousX = e.clientX;
+				}
+			}
+
+
+			if(((previousY - e.clientY)/moveRate)) {
+				directionY = ((previousY - e.clientY)/moveRate)	
+				if(mYPos + directionY < 100 && mYPos + directionY > 0) {
+					mYPos += directionY;	
+					previousY = e.clientY;
+				}
+			}
+
+			drawStuff(zoomInfo[zoomLevel]['x'],zoomInfo[zoomLevel]['y'],zoomLevel);
+			
+		} else {
+			updateUI();
+		}
+
+	});
 
 
 	// Setup mouse dragging
