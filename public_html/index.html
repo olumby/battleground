@@ -9,6 +9,7 @@
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:600,400' rel='stylesheet' type='text/css'>
 	<link href="assets/style/style.css" rel="stylesheet">
 	<script src="assets/js/jquery-1.9.1.js"></script>
+	<script src="assets/js/raphael-min.js"></script>
 
 </head>
 
@@ -16,7 +17,14 @@
 	
 	<div class="ui-overlay">
 
+
+		<canvas id="battleground"></canvas>
+		<canvas id="battleground-grid"></canvas>
+		<canvas id="battleground-items"></canvas>
+		<canvas id="battleground-boundaries"></canvas>
+
 		<div class="ui-overlay-gradient"></div>
+
 
 		<header id="main">
 			<div id="titles">
@@ -121,7 +129,6 @@
 			</div>
 		</aside>
 
-		<canvas id="battleground"></canvas>
 	</div>
 	<script src="assets/js/site.js"></script>
 	<script src="assets/js/battleground.js"></script>

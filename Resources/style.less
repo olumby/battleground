@@ -29,12 +29,25 @@ body {
 		text-decoration: none;
 	}
 
-	#battleground {
+	#battleground, #battleground-grid, #battleground-items, #battleground-boundaries {
+		position: absolute;
 		display:block;
+	}
+
+	#battleground-grid, #battleground-items, #battleground-boundaries {
+		pointer-events:none;
+	}
+
+	#battleground {
 		cursor: crosshair;
 		&:active {
 			cursor: move;
 		}
+	}
+
+	#battleground-grid {
+		opacity:0.2;
+		pointer-events:none;
 	}
 
 	.ui-overlay {
@@ -313,7 +326,8 @@ body {
 				margin-bottom:10px;				
 			}
 			.grid {
-				width:127px;
+				width:150px;
+				text-align: center;
 				.ui-grid-title, .ui-grid-on, .ui-grid-off {
 					font-size:12px;
 					text-shadow:@blueGlowStack;
@@ -321,6 +335,9 @@ body {
 					vertical-align:text-bottom;
 					display:inline-block;
 					text-transform: uppercase;
+					&.active {
+						text-shadow:@redGlowStack;
+					}
 				}
 				.ui-grid-title {
 					font-family:@OpenSansStack;
@@ -336,6 +353,7 @@ body {
 					text-shadow:@blueGlowStack;
 					font-family:@MavenProLightStack;
 					vertical-align:text-bottom;
+					width:40px;
 					&:focus {
 						outline:0;
 					}
@@ -345,7 +363,7 @@ body {
 				}
 			}
 			.boundaries {
-				width:175px;
+				width:190px; text-align: center;
 				.ui-boundaries-title, .ui-boundaries-on, .ui-boundaries-off {
 					font-size:12px;
 					text-shadow:@blueGlowStack;
@@ -353,6 +371,9 @@ body {
 					vertical-align:text-bottom;
 					display:inline-block;
 					text-transform: uppercase;
+					&.active {
+						text-shadow:@redGlowStack;
+					}
 				}
 				.ui-boundaries-title {
 					font-family:@OpenSansStack;
@@ -368,6 +389,7 @@ body {
 					text-shadow:@blueGlowStack;
 					font-family:@MavenProLightStack;
 					vertical-align:text-bottom;
+					width:40px;
 					&:focus {
 						outline:0;
 					}
