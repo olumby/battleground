@@ -1,114 +1,167 @@
 {
-  "mapInfo": {
-    "mp_naval": {
-      "xCenter": 59.02,
-      "yCenter": 46.53,
-      "gametypes": {
-        "ConquestLarge0": {
-          "points": [
-            {
-                "type": "objective",
-                "name": "C",
-                "resource": "assets/icons/inactive-obj-c.png",
-                "h": 38,
-                "w": 38,
-                "coors": [
-                    58.333,
-                    47.895
-                ]
-            },
-            {
-                "type": "objective",
-                "name": "E",
-                "resource": "assets/icons/inactive-obj-e.png",
-                "h": 38,
-                "w": 38,
-                "coors": [
-                    59.660,
-                    56.286
-                ]
-            },
-            {
-                "type": "objective",
-                "name": "A",
-                "resource": "assets/icons/inactive-obj-a.png",
-                "h": 38,
-                "w": 38,
-                "coors": [
-                    59.198,
-                    37.457
-                ]
-            },
-            {
-                "type": "objective",
-                "name": "D",
-                "resource": "assets/icons/inactive-obj-d.png",
-                "h": 38,
-                "w": 38,
-                "coors": [
-                    62.255,
-                    48.674
-                ]
-            },
-            {
-                "type": "objective",
-                "name": "B",
-                "resource": "assets/icons/inactive-obj-b.png",
-                "h": 38,
-                "w": 38,
-                "coors": [
-                    59.516,
-                    42.532
-                ]
-            },
-            {
-              "type": "base",
-              "name": "US",
-              "resource": "assets/icons/inactive-base-us.png",
-              "h": 38,
-              "w": 38,
-              "coors": [
-                47.65,
-                45.19
-              ]
-            },
-            {
-              "type": "base",
-              "name": "CN",
-              "resource": "assets/icons/inactive-base-cn.png",
-              "h": 38,
-              "w": 38,
-              "coors": [
-                72.15,
-                44.90
-              ]
-            }
-          ]
-        }
-      }
-    }
-  },
-  "zoomInfo": {
-    "0": {
-      "x": 8,
-      "y": 8,
-      "z": 0,
-      "label": "100%",
-      "grid": 200
-    },
-    "1": {
-      "x": 4,
-      "y": 4,
-      "z": 1,
-      "label": "50%",
-      "grid": 100
-    },
-    "2": {
-      "x": 2,
-      "y": 2,
-      "z": 2,
-      "label": "0%",
-      "grid": 50
-    }
-  }
+	"mapInfo": {
+		"mp_naval": {
+			"xCenter": 59.02,
+			"yCenter": 46.53,
+			"gametypes": {
+				"ConquestLarge0": {
+					"combatarea" :
+						{
+							"one": [
+							{
+								"x": 68.368,
+								"y": 37.86
+							},
+							{
+								"x": 65.946,
+								"y": 33.708
+							},
+							{
+								"x": 61.851,
+								"y": 31.949
+							},
+							{
+								"x": 49.048,
+								"y": 32.18
+							},
+							{
+								"x": 44.002,
+								"y": 34.717
+							},
+							{
+								"x": 41.032,
+								"y": 38.783
+							},
+							{
+								"x": 40.773,
+								"y": 55.075
+							},
+							{
+								"x": 42.762,
+								"y": 61.419
+							},
+							{
+								"x": 48.529,
+								"y": 63.581
+							},
+							{
+								"x": 62.832,
+								"y": 63.61
+							},
+							{
+								"x": 67.272,
+								"y": 62.024
+							},
+							{
+								"x": 69.493,
+								"y": 58.304
+							}
+						]
+					},
+					"points": [
+						{
+								"type": "objective",
+								"name": "C",
+								"resource": "assets/icons/inactive-obj-c.png",
+								"h": 38,
+								"w": 38,
+								"coors": [
+										58.333,
+										47.895
+								]
+						},
+						{
+								"type": "objective",
+								"name": "E",
+								"resource": "assets/icons/inactive-obj-e.png",
+								"h": 38,
+								"w": 38,
+								"coors": [
+										59.660,
+										56.286
+								]
+						},
+						{
+								"type": "objective",
+								"name": "A",
+								"resource": "assets/icons/inactive-obj-a.png",
+								"h": 38,
+								"w": 38,
+								"coors": [
+										59.198,
+										37.457
+								]
+						},
+						{
+								"type": "objective",
+								"name": "D",
+								"resource": "assets/icons/inactive-obj-d.png",
+								"h": 38,
+								"w": 38,
+								"coors": [
+										62.255,
+										48.674
+								]
+						},
+						{
+								"type": "objective",
+								"name": "B",
+								"resource": "assets/icons/inactive-obj-b.png",
+								"h": 38,
+								"w": 38,
+								"coors": [
+										59.516,
+										42.532
+								]
+						},
+						{
+							"type": "base",
+							"name": "US",
+							"resource": "assets/icons/inactive-base-us.png",
+							"h": 38,
+							"w": 38,
+							"coors": [
+								47.65,
+								45.19
+							]
+						},
+						{
+							"type": "base",
+							"name": "CN",
+							"resource": "assets/icons/inactive-base-cn.png",
+							"h": 38,
+							"w": 38,
+							"coors": [
+								72.15,
+								44.90
+							]
+						}
+					]
+				}
+			}
+		}
+	},
+	"zoomInfo": {
+		"0": {
+			"x": 8,
+			"y": 8,
+			"z": 0,
+			"label": "100%",
+			"grid": 200
+		},
+		"1": {
+			"x": 4,
+			"y": 4,
+			"z": 1,
+			"label": "50%",
+			"grid": 100
+		},
+		"2": {
+			"x": 2,
+			"y": 2,
+			"z": 2,
+			"label": "0%",
+			"grid": 50
+		}
+	}
 }

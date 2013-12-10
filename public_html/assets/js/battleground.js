@@ -1,6 +1,7 @@
 var globalData, zoomInfo, mapInfo, mXPos, mYPos, totalWidth, totalHeight, mCoorX, mCoorY,
 	showGrid = true,
-	showBoundaries = true;
+	showBoundaries = true,
+	selectedFaction = "0";
 
 var canvas = document.getElementById('battleground');
 var ctx = canvas.getContext('2d');
@@ -41,12 +42,6 @@ $(document).ready(function() {
 	var baseUrl = "assets/maps/"+mapName+"/minimap_Win32_mip{z}_{x}_{y}.jpg";
 	var zoomLevel = 1;
 
-	mXPos = 50;
-	mYPos = 50;
-
-	mCoorX = 50;
-	mCoorY = 50;
-
 	var imageRes = 1024;
 
 	// Load in the JSON and start the work
@@ -56,7 +51,7 @@ $(document).ready(function() {
 		zoomInfo = data['zoomInfo'];
 		mapInfo = data['mapInfo'][mapName];
 
-		if(data['mapInfo'][mapName]) {
+		if(mapInfo) {
 			mXPos = data['mapInfo'][mapName]['xCenter'];
 			mCoorX = data['mapInfo'][mapName]['xCenter'];
 			mYPos =  data['mapInfo'][mapName]['yCenter'];
@@ -133,8 +128,8 @@ $(document).ready(function() {
 
 
 		drawGrid(totalWidth, totalHeight, xStartPx, yStartPx);
-		drawItems(totalWidth, totalHeight, xStartPx, yStartPx);
 		drawBoundaries(totalWidth, totalHeight, xStartPx, yStartPx);
+		//drawItems(totalWidth, totalHeight, xStartPx, yStartPx);
 		
 		updateUI();
 
@@ -185,12 +180,13 @@ $(document).ready(function() {
 
 				var points = val.coors;
 
+				console.log(val);
+
 				theimg.onload = function() {
 
 					var xo = (width*(points[0]/100))-xOffset-(this.width/2);
 					var yo = (height*(points[1]/100))-yOffset-(this.height/2);
 					items_context.drawImage(theimg, xo, yo, theimg.width, theimg.height);
-
 
 				}
 
@@ -216,29 +212,17 @@ $(document).ready(function() {
 			boundaries_context.strokeStyle = "#fff";
 			boundaries_context.beginPath();
 			
-			/*boundaries_context.moveTo( width*(53/100)-xOffset , height*(35/100)-yOffset );
-			boundaries_context.lineTo( width*(50/100)-xOffset , height*(44/100)-yOffset );
-			boundaries_context.lineTo( width*(50/100)-xOffset , height*(51/100)-yOffset );
-			boundaries_context.lineTo( width*(52/100)-xOffset , height*(57/100)-yOffset );
-			boundaries_context.lineTo( width*(55/100)-xOffset , height*(63/100)-yOffset );
-			boundaries_context.lineTo( width*(65/100)-xOffset , height*(64/100)-yOffset );
-			boundaries_context.lineTo( width*(67/100)-xOffset , height*(57/100)-yOffset );
-			boundaries_context.lineTo( width*(68/100)-xOffset , height*(45/100)-yOffset );
-			boundaries_context.lineTo( width*(66/100)-xOffset , height*(33/100)-yOffset ); */
+			if(mapInfo) {
+				var tempArr = mapInfo['gametypes']['ConquestLarge0']['combatarea']['one'];
 
-boundaries_context.lineTo( width*(68.368/100)-xOffset , height*(37.860/100)-yOffset );
-boundaries_context.lineTo( width*(65.946/100)-xOffset , height*(33.708/100)-yOffset );
-boundaries_context.lineTo( width*(61.851/100)-xOffset , height*(31.949/100)-yOffset );
-boundaries_context.lineTo( width*(49.048/100)-xOffset , height*(32.180/100)-yOffset );
-boundaries_context.lineTo( width*(44.002/100)-xOffset , height*(34.717/100)-yOffset );
-boundaries_context.lineTo( width*(41.032/100)-xOffset , height*(38.783/100)-yOffset );
-boundaries_context.lineTo( width*(40.773/100)-xOffset , height*(55.075/100)-yOffset );
-boundaries_context.lineTo( width*(42.762/100)-xOffset , height*(61.419/100)-yOffset );
-boundaries_context.lineTo( width*(48.529/100)-xOffset , height*(63.581/100)-yOffset );
-boundaries_context.lineTo( width*(62.832/100)-xOffset , height*(63.610/100)-yOffset );
-boundaries_context.lineTo( width*(67.272/100)-xOffset , height*(62.024/100)-yOffset );
-boundaries_context.lineTo( width*(69.493/100)-xOffset , height*(58.304/100)-yOffset );
 
+				$.each(tempArr, function(index, val) {
+
+					boundaries_context.lineTo( width*(val.x/100)-xOffset , height*(val.y/100)-yOffset );
+
+				});
+
+			}
 
 			boundaries_context.closePath();
 

@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-	var mode = 'objectives';
+	var mode = 'boundaries';
 
 
 	if(mode == 'boundaries') {
@@ -17,7 +17,7 @@ $(document).ready(function() {
 				xCoor = (((( val / (data[0]['pixelresolution']) ) * 100)).toFixed(3));
 				yCoor = (((( y[index] / (data[0]['pixelresolution']) ) * 100)).toFixed(3));
 
-				$("#box").append("boundaries_context.lineTo( width*("+xCoor+"/100)-xOffset , height*("+yCoor+"/100)-yOffset );\n");
+				$("#box").append('{ "x":'+xCoor+', "y":'+yCoor+' },');
 
 			});
 
