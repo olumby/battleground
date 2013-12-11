@@ -15,11 +15,64 @@ var items_context = items_canvas.getContext('2d');
 var boundaries_canvas = document.getElementById('battleground-boundaries');
 var boundaries_context = boundaries_canvas.getContext('2d');
 
+var imageCache = new Array();
+
 $(document).ready(function() {
 
 	// Set up to resize canvas on window change.
 
+	
+
+	initialLoad();
+
+	function initialLoad() {
+
+		// Load in the JSON and start the work
+
+		$.getJSON("assets/js/data.json", function(data) {
+			globalData = data;
+			zoomInfo = data['zoomInfo'];
+			mapInfo = data['mapInfo'][mapName];
+
+			if(mapInfo) {
+				mXPos = data['mapInfo'][mapName]['xCenter'];
+				mCoorX = data['mapInfo'][mapName]['xCenter'];
+				mYPos =  data['mapInfo'][mapName]['yCenter'];
+				mCoorY = data['mapInfo'][mapName]['yCenter'];
+			
+
+				var tempArr = mapInfo['gametypes']['ConquestLarge0']['points'];
+
+				$.each(tempArr, function(index, val) {
+
+					var theimg = new Image();
+					theimg.src = val.resource;
+
+					var imageDict = {
+						"x" : val.coors[0],
+						"y" : val.coors[1],
+						"w" : val.w,
+						"h" : val.h,
+						"image" : theimg
+					};
+
+					imageCache.push(imageDict);
+										
+					//drawStuff(zoomInfo[zoomLevel]['x'],zoomInfo[zoomLevel]['y'],zoomLevel);
+
+				});
+
+
+			}
+
+			resizeCanvas();
+			updateUI();
+		});
+
+	}
+
 	window.addEventListener('resize', resizeCanvas, false);
+
 
 	function resizeCanvas() {
 		canvas.width = window.innerWidth;
@@ -43,24 +96,6 @@ $(document).ready(function() {
 	var zoomLevel = 1;
 
 	var imageRes = 1024;
-
-	// Load in the JSON and start the work
-
-	$.getJSON("assets/js/data.json", function(data) {
-		globalData = data;
-		zoomInfo = data['zoomInfo'];
-		mapInfo = data['mapInfo'][mapName];
-
-		if(mapInfo) {
-			mXPos = data['mapInfo'][mapName]['xCenter'];
-			mCoorX = data['mapInfo'][mapName]['xCenter'];
-			mYPos =  data['mapInfo'][mapName]['yCenter'];
-			mCoorY = data['mapInfo'][mapName]['yCenter'];
-		}
-
-		resizeCanvas();
-		updateUI();
-	});
 
 	// Main Drawing.
 
@@ -129,7 +164,7 @@ $(document).ready(function() {
 
 		drawGrid(totalWidth, totalHeight, xStartPx, yStartPx);
 		drawBoundaries(totalWidth, totalHeight, xStartPx, yStartPx);
-		//drawItems(totalWidth, totalHeight, xStartPx, yStartPx);
+		drawItems(totalWidth, totalHeight, xStartPx, yStartPx);
 		
 		updateUI();
 
@@ -171,29 +206,22 @@ $(document).ready(function() {
 		items_context.clearRect(0, 0, items_canvas.width, items_canvas.height);
 
 		if(mapInfo) {
-			var tempArr = mapInfo['gametypes']['ConquestLarge0']['points'];
 
-			$.each(tempArr, function(index, val) {
-
-				var theimg = new Image();
-				theimg.src = val.resource;
-
-				var points = val.coors;
+			$.each(imageCache, function(index, val) {
 
 				console.log(val);
 
-				theimg.onload = function() {
 
-					var xo = (width*(points[0]/100))-xOffset-(this.width/2);
-					var yo = (height*(points[1]/100))-yOffset-(this.height/2);
-					items_context.drawImage(theimg, xo, yo, theimg.width, theimg.height);
-
-				}
+				var xo = (width*(val.x/100))-xOffset-(val.w/2);
+				var yo = (height*(val.y/100))-yOffset-(val.h/2);
+				
+				items_context.drawImage(val.image, xo, yo, val.w, val.h);
 
 			});
 
 
 		}
+
 
 	}
 
@@ -311,7 +339,7 @@ $(document).ready(function() {
 
 		if (clicking) {
 			e.preventDefault();
-			
+
 			var directionX, directionY;
 
 			var moveRate = (100/(zoomLevel+1));
