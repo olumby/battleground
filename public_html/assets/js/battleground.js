@@ -1,7 +1,8 @@
-var globalData, zoomInfo, mapInfo, mXPos, mYPos, totalWidth, totalHeight, mCoorX, mCoorY,
+var globalData, zoomInfo, mapInfo, gameMode, mXPos, mYPos, totalWidth, totalHeight, mCoorX, mCoorY,
 	showGrid = true,
 	showBoundaries = true,
-	selectedFaction = "0";
+	selectedFaction = 1,
+	selectedMode = 0;
 
 var canvas = document.getElementById('battleground');
 var ctx = canvas.getContext('2d');
@@ -16,12 +17,11 @@ var boundaries_canvas = document.getElementById('battleground-boundaries');
 var boundaries_context = boundaries_canvas.getContext('2d');
 
 var imageCache = new Array();
+var tileCache = new Array();
 
 $(document).ready(function() {
 
 	// Set up to resize canvas on window change.
-
-	
 
 	initialLoad();
 
@@ -31,8 +31,11 @@ $(document).ready(function() {
 
 		$.getJSON("assets/js/data.json", function(data) {
 			globalData = data;
+
+
 			zoomInfo = data['zoomInfo'];
 			mapInfo = data['mapInfo'][mapName];
+			gameMode = data['gameModes'][selectedMode];
 
 			if(mapInfo) {
 				mXPos = data['mapInfo'][mapName]['xCenter'];
@@ -40,8 +43,7 @@ $(document).ready(function() {
 				mYPos =  data['mapInfo'][mapName]['yCenter'];
 				mCoorY = data['mapInfo'][mapName]['yCenter'];
 			
-
-				var tempArr = mapInfo['gametypes']['ConquestLarge0']['points'];
+				var tempArr = mapInfo['gametypes'][gameMode['local']]['points'];
 
 				$.each(tempArr, function(index, val) {
 
@@ -142,21 +144,35 @@ $(document).ready(function() {
 
 		$.each(coordinates, function(index, val) {
 
-			var img = new Image();
+			if(tileCache[val.url]) {
 
-			if(val.x > (xloop-1) || val.x < 0 || val.y > (yloop-1) || val.y < 0) {
-				img.src = "assets/images/black.png";
+				var xOffset = (imageRes * (val.x - coordinates[0].x))-globalXOffset;
+				var yOffset = (imageRes * (val.y - coordinates[0].y))-globalYOffset;
+				
+				ctx.drawImage(tileCache[val.url], xOffset, yOffset, imageRes, imageRes);
+
 			} else {
-				img.src = val.url;
-			}
-			
-			img.width = imageRes;
-			img.height = imageRes;
 
-			var xOffset = (imageRes * (val.x - coordinates[0].x))-globalXOffset;
-			var yOffset = (imageRes * (val.y - coordinates[0].y))-globalYOffset;
-			img.onload = function() {
-				ctx.drawImage(img, xOffset, yOffset, imageRes, imageRes);
+				var img = new Image();
+
+				if(val.x > (xloop-1) || val.x < 0 || val.y > (yloop-1) || val.y < 0) {
+					img.src = "assets/images/black.png";
+				} else {
+					img.src = val.url;
+				}
+				
+				img.width = imageRes;
+				img.height = imageRes;
+
+				var xOffset = (imageRes * (val.x - coordinates[0].x))-globalXOffset;
+				var yOffset = (imageRes * (val.y - coordinates[0].y))-globalYOffset;
+				
+				img.onload = function() {
+					ctx.drawImage(img, xOffset, yOffset, imageRes, imageRes);
+				}
+
+				tileCache[val.url] = img;
+
 			}
 
 		});
@@ -209,8 +225,6 @@ $(document).ready(function() {
 
 			$.each(imageCache, function(index, val) {
 
-				console.log(val);
-
 
 				var xo = (width*(val.x/100))-xOffset-(val.w/2);
 				var yo = (height*(val.y/100))-yOffset-(val.h/2);
@@ -241,10 +255,12 @@ $(document).ready(function() {
 			boundaries_context.beginPath();
 			
 			if(mapInfo) {
-				var tempArr = mapInfo['gametypes']['ConquestLarge0']['combatarea']['one'];
+				var tempArr = mapInfo['gametypes'][gameMode['local']]['combatarea'][selectedFaction]['points'];
 
 
 				$.each(tempArr, function(index, val) {
+
+					console.log(val);
 
 					boundaries_context.lineTo( width*(val.x/100)-xOffset , height*(val.y/100)-yOffset );
 
@@ -275,8 +291,6 @@ $(document).ready(function() {
 	});
 
 	$('#battleground').bind("touchmove", function(e){
-
-		console.log(e.touches);
 
 		if (touching) {
 			e.preventDefault();

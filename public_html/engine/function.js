@@ -1,69 +1,64 @@
-$(document).ready(function() {
 
-	var mode = 'boundaries';
+function getBoundaries(dataFile) {
 
+	$.getJSON(dataFile, function(data) {
 
-	if(mode == 'boundaries') {
+		var x = data['x'];
+		var y = data['y'];
 
-		$.getJSON("data.json", function(data) {
+		$("#box").text('');
 
-			var x = data[0]['x'];
-			var y = data[0]['y'];
-
-
-			$.each(x, function(index, val) {
+		$.each(x, function(index, val) {
 
 
-				xCoor = (((( val / (data[0]['pixelresolution']) ) * 100)).toFixed(3));
-				yCoor = (((( y[index] / (data[0]['pixelresolution']) ) * 100)).toFixed(3));
+			xCoor = (((( val / (data['pixelresolution']) ) * 100)).toFixed(3));
+			yCoor = (((( y[index] / (data['pixelresolution']) ) * 100)).toFixed(3));
 
-				$("#box").append('{ "x":'+xCoor+', "y":'+yCoor+' },');
-
-			});
+			$("#box").append('{ "x":'+xCoor+', "y":'+yCoor+' },');
 
 		});
 
+	});
 
-	} else if(mode == 'objectives') {
-
-
-		$.getJSON("data.json", function(data) {
-
-			var x = data[1]['x'];
-			var y = data[1]['y'];
-			var n = data[1]['name'];
+}
 
 
-			$.each(x, function(index, val) {
+function getPoints(dataFile) {
 
 
-				xCoor = ((( val / (data[0]['pixelresolution']) ) * 100).toFixed(3));
-				yCoor = ((( y[index] / (data[0]['pixelresolution']) ) * 100).toFixed(3));
+	$.getJSON(dataFile, function(data) {
+
+		var x = data[1]['x'];
+		var y = data[1]['y'];
+		var n = data[1]['name'];
+
+		$("#box").text('');
+
+		$.each(x, function(index, val) {
 
 
-				$("#box").append('{\
-	              "type": "objective",\
-	              "name": "'+n[index]+'",\
-	              "resource": "assets/icons/inactive-obj-a.png",\
-	              "h": 38,\
-	              "w": 38,\
-	              "coors": [\
-	                '+xCoor+',\
-	                '+yCoor+'\
-	              ]\
-	            },');
+			xCoor = ((( val / (data[0]['pixelresolution']) ) * 100).toFixed(3));
+			yCoor = ((( y[index] / (data[0]['pixelresolution']) ) * 100).toFixed(3));
 
 
-			});
+			$("#box").append('{\
+              "type": "objective",\
+              "name": "'+n[index]+'",\
+              "resource": "assets/icons/inactive-obj-a.png",\
+              "h": 38,\
+              "w": 38,\
+              "coors": [\
+                '+xCoor+',\
+                '+yCoor+'\
+              ]\
+            },');
+
 
 		});
 
-
-	}
-
+	});
 
 
+}
 
 
-
-});
